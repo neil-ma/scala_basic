@@ -13,7 +13,16 @@ object TestCase {
     println(StringUtils.testEquals(str1,str2))
     println(StringUtils.testEqualsNoMatter(str1,str2))
 
-    print(StringUtils.multilineString())
+    println(StringUtils.multilineString())
+
+    val splitString = "eggs, bread, milk, fork"
+    StringUtils.splitString(splitString)
+
+
+
+
+
+
   }
 
 }

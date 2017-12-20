@@ -7,6 +7,7 @@ object StringUtils {
 
   /**
    * 功能：比较str1和str2两个字符串是否相等
+   * 方法：使用==
    * @param str1
    * @param str2
    * @return
@@ -20,6 +21,7 @@ object StringUtils {
 
   /**
    * 功能：比较str1和str2两个字符串是否相等，不区分大小写。
+   * 方法：使用字符串的toUpperCase方法转化（或者直接使用java.lang.String.equalsIgnoreCase）
    * @param str1
    * @param str2
    * @return
@@ -33,7 +35,7 @@ object StringUtils {
 
   /**
    * 功能：创建多行字符串
-   * 使用三个双引号创建多行字符串。
+   * 方法： 使用三个双引号创建多行字符串。
    * 为了去掉从第二行开始的开头的空格，需要在字符串尾部添加stripMargin方法，并且第一行后的所有行以管道符(|)开头
    * @return
    */
@@ -44,6 +46,17 @@ object StringUtils {
         |conversation
       """.stripMargin
     foo
+  }
+
+  /**
+   * 功能：分隔字符串
+   * 方法：使用split方法
+   * split方法会返回以字符串为元素的一个数组。Array[String]
+   * split可以接受正则表达式作为参数(所以可以处理复杂的字符串分隔)。为了防止空格等出现，最好trim每一个字符串。
+   * @param str
+   */
+  def splitString(str:String) = {
+    str.split(',').map(_.trim).foreach(println)
   }
 
 }
