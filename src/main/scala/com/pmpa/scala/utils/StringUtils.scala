@@ -30,7 +30,7 @@ object StringUtils {
   def testEqualsNoMatter(str1:String,str2:String):Boolean = {
     str1.toUpperCase() == str2.toUpperCase()
     //这是使用java中的方法。
-    //str1.equalsIgnoreCase(str2)
+    str1.equalsIgnoreCase(str2)
   }
 
   /**
@@ -57,6 +57,33 @@ object StringUtils {
    */
   def splitString(str:String) = {
     str.split(',').map(_.trim).foreach(println)
+  }
+
+  /**
+   * 功能：将一个变量代换进字符串中（类似C语言中的printf）
+   * 方法：(1)Scala中的字符串插值就是在字符串前加字母's'，即 s字符串。
+   *       (2)使用f字符串格式化
+   *       (3)使用raw : 不会对字符串中的字符做转义
+   * (1)在字符串前加s，然后在字符串中放入变量，每个变量都以'$'开头。同时，还可以使用${} 将表达式包入其中，可以内嵌任何表达式。
+   *    's'实际上是一个方法
+   * (2)需要做：a.在字符串前加'f'; b.在变量之后使用格式化操作符。
+   * >>> author: natty   2017-12-20
+   */
+  def valReplaceStr() = {
+    val name = "Fred"
+    val age = 30
+    val weight = 200.00
+
+    val s1 = s"$name is $age years old, and weighs $weight pound!!"
+    println(s"s字符串读入变量：$s1")
+    val s2 = s"$name is ${age+2} years old, and weighs $weight pound!!"
+    println(s"s字符串读入表达式：$s2")
+    val s3 = f"$name is $age years old, and weighs $weight%.0f pound!!"
+    println(s"f字符串读入格式化表达符：$s3")
+
+    val t1 = "milk\nbread"
+    val t2 = raw"milk\nbread"
+    println(s"普通字符串测试结果：\n$t1 \nraw字符串测试结果：\n$t2")
   }
 
 }

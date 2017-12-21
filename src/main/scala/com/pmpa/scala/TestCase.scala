@@ -18,6 +18,8 @@ object TestCase {
     val splitString = "eggs, bread, milk, fork"
     StringUtils.splitString(splitString)
 
+    StringUtils.valReplaceStr()
+
 
 
 
