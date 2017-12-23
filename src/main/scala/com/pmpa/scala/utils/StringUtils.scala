@@ -176,7 +176,4 @@ object StringUtils {
     val groupPattern(num,alb,black) = "101 street %"
     println(s"分组匹配正则表达式的结果：num=$num,alb=$alb,black=$black")
   }
-
-
-
 }
