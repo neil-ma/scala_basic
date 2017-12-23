@@ -38,6 +38,8 @@ object ValUtils {
    * 方法：定义变量时候指定类型，即可完成重载。
    *      Scala在为数值变量赋值时，默认会把数据类型也传给该变量。例如: val num = 0  那么num也就是Int类型了。
    *      如果不想让其为Int，可以制定num的类型。
+   *
+   *      author:natty  2017-12-23
    */
 
   def overloadDefaultType()={
@@ -46,12 +48,9 @@ object ValUtils {
     println(s"将10赋值给变量时，默认的类型是：${num1.getClass.getName},值为:$num1 ；指定Float类型后，类型为：${num2.getClass.getName},值为:$num2 ")
 
     val v1 = "scala"
-    //向上转换、类型归属。
+    //向上转换、类型归属。  最终类型还是String,没向上转为Object
     val v2 = v1: Object
     println(s"v2的类型是${v2.getClass.getName}")
-
-
-
   }
 
 
