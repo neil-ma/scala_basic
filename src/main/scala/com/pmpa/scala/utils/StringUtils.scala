@@ -129,9 +129,11 @@ object StringUtils {
    *      (2) 使用Regex对象来生成正则表达式。
    *      (3) 正则表达式可以替换匹配上了的字符串。但是不是修改原来的字符串，而是产生一个新的字符串，所以需要赋给
    *          一个新的变量，这点需要注意。
+   *      (4) 分组提取正则表达式匹配的部分
    *
    *      (1) findFirstIn返回第一次匹配(类型option[String])，findAllIn返回所有匹配(类型迭代器)。
    *      Option相当于一个容器，包含0或1个值的容器。如果有值的话，返回一个Some(xx) ，如果没有值返回None。
+   *      (4)定义想要抽取的正则表达式，在他们周围加上括号，可以当做正则表达式组使用。
    *
    * >>> author: natty   2017-12-23
    */
@@ -167,6 +169,12 @@ object StringUtils {
     val replaceAll = patterObjReplace.replaceAllIn(str,"xxx")
     println(s"只替换第一次匹配上的字符串：$replaceOneTime")
     println(s"替换所有匹配上的字符串：$replaceAll")
+
+    //提取分组匹配正则表达式的字符串。
+    val groupPattern = "([0-9]+) ([A-Za-z]+) (%)".r
+    //分组获取变量，更加清晰。这里同时处理了
+    val groupPattern(num,alb,black) = "101 street %"
+    println(s"分组匹配正则表达式的结果：num=$num,alb=$alb,black=$black")
   }
 
 
