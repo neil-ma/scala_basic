@@ -8,17 +8,19 @@ import com.pmpa.scala.utils.StringUtils
 object TestCase {
 
   def main (args: Array[String]){
-    val str1 = "hello"
-    val str2 = "Hello"
-    println(StringUtils.testEquals(str1,str2))
-    println(StringUtils.testEqualsNoMatter(str1,str2))
+//    val str1 = "hello"
+//    val str2 = "Hello"
+//    println(StringUtils.testEquals(str1,str2))
+//    println(StringUtils.testEqualsNoMatter(str1,str2))
+//
+//    println(StringUtils.multilineString())
+//
+//    val splitString = "eggs, bread, milk, fork"
+//    StringUtils.splitString(splitString)
+//
+//    StringUtils.valReplaceStr()
 
-    println(StringUtils.multilineString())
-
-    val splitString = "eggs, bread, milk, fork"
-    StringUtils.splitString(splitString)
-
-    StringUtils.valReplaceStr()
+    StringUtils.cycle_deal("HELLO,WORLD!")
 
 
 

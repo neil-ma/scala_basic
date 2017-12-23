@@ -86,4 +86,39 @@ object StringUtils {
     println(s"普通字符串测试结果：\n$t1 \nraw字符串测试结果：\n$t2")
   }
 
+  /**
+   * 功能：挨个处理字符串的每个字符
+   * 方法: (1)map方法 (2)for...yield (3)foreach方法
+   * @param str
+   *        (1) map将String当做一个字符序列的集合来处理，map方法有一个隐性的循环，每次循环给算法传一个字符。
+   *        (2) 在for循环中添加yield，实际上是将每次循环的结果放在一个临时存放区。
+   *        (3) map和for...yield 两种方式是将一个集合转化为另一个新的集合，foreach则是典型的对每个元素进行操作但是不返回结果。
+   */
+  def cycle_deal(str:String) = {
+      val map_str = str.filter(_!='L').map(_.toLower)
+      val map_str1 = str.filter(_!='L').map(c=>c.toLower)
+      val map_str2 = str.map(toLower)
+      println(s"使用map方法生成新字符序列:$str => $map_str")
+      println(s"使用map方法生成新字符序列（函数式）:$str => $map_str1")
+      println(s"使用map方法生成新字符序列（自定义函数）:$str => $map_str2")
+
+      val yield_str = for (c<-str) yield c.toLower
+      //for循环可以添加语句块 ，大括号括起。
+      val yield_str2 = for {
+        c <- str
+        if c != 'L'
+      } yield c.toLower
+      println(s"使用for...yield生成新字符序列:$str => $yield_str")
+      println(s"使用for...yield生成新字符序列:$str => $yield_str2")
+
+      //val foreach_str = str.foreach(c=>c.isLower)  //这种方式不可以
+      str.foreach(print)
+  }
+
+  def toLower(c:Char):Char = {
+    (c.toByte +32).toChar
+  }
+
+
+
 }
