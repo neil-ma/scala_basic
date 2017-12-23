@@ -1,5 +1,7 @@
 package com.pmpa.scala.utils
 
+import scala.util.matching.Regex
+
 /**
  * Created by natty.ma on 2017/12/20.
  */
@@ -93,6 +95,8 @@ object StringUtils {
    *        (1) map将String当做一个字符序列的集合来处理，map方法有一个隐性的循环，每次循环给算法传一个字符。
    *        (2) 在for循环中添加yield，实际上是将每次循环的结果放在一个临时存放区。
    *        (3) map和for...yield 两种方式是将一个集合转化为另一个新的集合，foreach则是典型的对每个元素进行操作但是不返回结果。
+   *
+   *  >>> author: natty   2017-12-22
    */
   def cycle_deal(str:String) = {
       val map_str = str.filter(_!='L').map(_.toLower)
@@ -117,6 +121,52 @@ object StringUtils {
 
   def toLower(c:Char):Char = {
     (c.toByte +32).toChar
+  }
+
+  /**
+   * 功能：使用正则表达式匹配搜索和替换字符串
+   * 方法：(1) 直接使用String.r 来生成正则表达式。
+   *      (2) 使用Regex对象来生成正则表达式。
+   *      (3) 正则表达式可以替换匹配上了的字符串。但是不是修改原来的字符串，而是产生一个新的字符串，所以需要赋给
+   *          一个新的变量，这点需要注意。
+   *
+   *      (1) findFirstIn返回第一次匹配(类型option[String])，findAllIn返回所有匹配(类型迭代器)。
+   *      Option相当于一个容器，包含0或1个值的容器。如果有值的话，返回一个Some(xx) ，如果没有值返回None。
+   *
+   * >>> author: natty   2017-12-23
+   */
+  def regexFindReplace()={
+    // 先使用String.r方式来显示匹配。
+    //Regex： + 匹配前面的子表达式一次或多次(大于等于1次）。
+    val pattern = "[0-9]+".r
+    val str =  "123 Main Street No.892"
+    //Option[String]
+    val match1 = pattern.findFirstIn(str)
+    //scala.util.matching.Regex.MatchIterator
+    val match2 = pattern.findAllIn(str)
+    match1.foreach(println)
+    match2.foreach(println)
+    //匹配的多个表达式，可以转化为Array
+    println(s"多次匹配转换为Array：${match2.toArray}")
+    //使用match表达式来处理Option[String]
+    match1 match {
+      case Some(s) => println(s"Found $s")
+      case None =>
+    }
+
+    //使用Regex对象来创建正则表达式对象。实际应用中建议使用这种
+    val patternObj = new Regex("([a-z]|[A-Z])+")
+    print("使用Regex对象来匹配第一个字母：")
+    patternObj.findFirstIn(str).foreach(println)
+    print("使用Regex对象来匹配all字母：")
+    patternObj.findAllIn(str).foreach(println)
+
+    //使用正则表达式来实现替换,
+    val patterObjReplace = new Regex("[1-9]+")
+    val replaceOneTime = patterObjReplace.replaceFirstIn(str,"xxx")
+    val replaceAll = patterObjReplace.replaceAllIn(str,"xxx")
+    println(s"只替换第一次匹配上的字符串：$replaceOneTime")
+    println(s"替换所有匹配上的字符串：$replaceAll")
   }
 
 

@@ -20,8 +20,9 @@ object TestCase {
 //
 //    StringUtils.valReplaceStr()
 
-    StringUtils.cycle_deal("HELLO,WORLD!")
+//    StringUtils.cycle_deal("HELLO,WORLD!")
 
+      StringUtils.regexFindReplace()
 
 
 
