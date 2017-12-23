@@ -1,6 +1,7 @@
 package com.pmpa.scala
 
-import com.pmpa.scala.utils.StringUtils
+import com.pmpa.scala.utils.ValUtils
+
 
 /**
  * Created by natty.ma on 2017/12/20.
@@ -8,6 +9,8 @@ import com.pmpa.scala.utils.StringUtils
 object TestCase {
 
   def main (args: Array[String]){
+
+//  Testing for  Object  String Utils:
 //    val str1 = "hello"
 //    val str2 = "Hello"
 //    println(StringUtils.testEquals(str1,str2))
@@ -22,7 +25,11 @@ object TestCase {
 
 //    StringUtils.cycle_deal("HELLO,WORLD!")
 
-      StringUtils.regexFindReplace()
+//      StringUtils.regexFindReplace()
+
+
+    //Testing for object ValUtils
+    ValUtils.stringToValue()
 
 
 
