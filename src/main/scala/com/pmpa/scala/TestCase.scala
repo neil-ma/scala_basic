@@ -29,8 +29,8 @@ object TestCase {
 
 
     //Testing for object ValUtils
-    ValUtils.stringToValue()
-
+//    ValUtils.stringToValue()
+      ValUtils.overloadDefaultType()
 
 
 
