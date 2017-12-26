@@ -176,4 +176,18 @@ object StringUtils {
     val groupPattern(num,alb,black) = "101 street %"
     println(s"分组匹配正则表达式的结果：num=$num,alb=$alb,black=$black")
   }
+
+  /**
+   * 隐式转换类
+   * @param s
+   * 优点：不需要继承自一个现有的类再去添加功能（没必要创建一个继承自String的新类MyString）。
+   *      隐式转化的工作过程：
+   *           (1)编译器找到字符串常量，测试类中是"SGEW"
+   *           (2)编译器发现，需要调用"SGEW".increment方法。
+   *           (3)因为编译器在String类中找不到increment方法，它开始在当前范围内搜索一个接收String作为参数的隐式转换。
+   *           (4)如此，编译器找到了类StringImp，并且在这类中找到了increment方法。（注意，隐式转换类中可以定义很多方法）
+   */
+  implicit class StringImp(s:String) {
+    def increment:String = s.map(c=>(c+1).toChar)
+  }
 }

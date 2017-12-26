@@ -34,6 +34,25 @@ object ValUtils {
   }
 
   /**
+   * 功能：把一个数值类型转化为另一种数值类型。
+   * 方法：(1)在所有数值类型都可以使用to*方法，转化为相应的类型。
+   *        例如： toByte,toDouble,toInt,toFloat,toString等等。
+   *       (2) 在做类型转换之前，一般需要确定是否可转，否则可能抛异常，例如将"foo"转int会报异常。
+   */
+  def valueToValue() ={
+    val a = 45.23
+    println(s"float转为int：$a => ${a.toInt}")
+    val b = 19
+    println(s"Int转为Float：$b => ${b.toFloat}")
+
+    val c = 10000
+    // isValidLong isValidInt 等等，测试一下是否是一个有效的要转的类型的数据。
+    if (c.isValidByte)
+      println(s"可转化为Byte, $c => ${c.toByte} ")
+    else
+      println(s"$c 无法转为Byte")
+  }
+  /**
    * 功能：重载默认的数据类型：
    * 方法：定义变量时候指定类型，即可完成重载。
    *      Scala在为数值变量赋值时，默认会把数据类型也传给该变量。例如: val num = 0  那么num也就是Int类型了。

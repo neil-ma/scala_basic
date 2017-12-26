@@ -1,7 +1,7 @@
 package com.pmpa.scala
 
 import com.pmpa.scala.utils.ValUtils
-
+import com.pmpa.scala.utils.StringUtils._
 
 /**
  * Created by natty.ma on 2017/12/20.
@@ -25,12 +25,17 @@ object TestCase {
 
 //    StringUtils.cycle_deal("HELLO,WORLD!")
 
+//    隐式转化类
 //      StringUtils.regexFindReplace()
+//      val psg = "SGEW"
+//      print(psg.increment)
+
 
 
     //Testing for object ValUtils
 //    ValUtils.stringToValue()
-      ValUtils.overloadDefaultType()
+//      ValUtils.overloadDefaultType()
+    ValUtils.valueToValue()
 
 
 
