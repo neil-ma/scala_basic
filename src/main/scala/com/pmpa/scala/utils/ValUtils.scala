@@ -126,6 +126,15 @@ object ValUtils {
     //可以重置种子
     r1.setSeed(10000)
     println(r1.nextInt(100))
+
+    //也可以生成一个随机字符
+    val random_char = r1.nextPrintableChar()
+    println(s"生成随机字符:$random_char")
+
+    //利用随机数创建一个随机长度的集合。
+    val random_list = for (c <- Range(0,r1.nextInt(10))) yield  c*2
+    val random_list2 = for (c <- Range(0,r1.nextInt(10))) yield  r.nextPrintableChar()
+    println(s"随机整数集合：$random_list，随机字符集合：$random_list2")
   }
 
 }
