@@ -66,7 +66,8 @@ object ValUtils {
   def overloadDefaultType()={
     val num1 = 10
     val num2:Float = 10
-    println(s"将10赋值给变量时，默认的类型是：${num1.getClass.getName},值为:$num1 ；指定Float类型后，类型为：${num2.getClass.getName},值为:$num2 ")
+    println(s"将10赋值给变量时，默认的类型是：${num1.getClass.getName},值为:$num1 ；" +
+      s"指定Float类型后，类型为：${num2.getClass.getName},值为:$num2 ")
 
     val v1 = "scala"
     //向上转换、类型归属。  最终类型还是String,没向上转为Object
@@ -88,6 +89,7 @@ object ValUtils {
    * 功能：需要编写一个处理非常大的整数的程序。
    * 方法： (1)使用BigInt和BigDecimal处理比较大的数值。
    *        (2)获得最大的Int值，最大的Byte值，最大的Double值等等。
+   *   author:natty  2017-12-27
    */
   def handleBigNum() ={
     var b = BigInt("9876543210")
@@ -98,6 +100,32 @@ object ValUtils {
     val max_float = Float.MaxValue
     val max_byte = Byte.MaxValue
     println(s"最大整数：$max_int,最大float：$max_float,最大byte：$max_byte")
+  }
+
+  /**
+   * 功能： 使用随机数
+   * 方法: (1) 使用scala.uitl.Random类生成随机数
+   *       (2) 在创建随机对象时，可以使用任一个int或者long类型数字作为种子。并且可以修改该种子。
+   *            在同一个种子的情况下，两次执行会得到同一个随机数。
+   *   author:natty  2017-12-27
+   */
+  def randomNum()={
+    val r = scala.util.Random
+    val random_int = r.nextInt()
+    println(s"任意生成一个随机整数：$random_int")
+    val random_int1 = r.nextInt(100)
+    println(s"任意生成一个[0,100)的整数：$random_int1")
+
+    //nextFloat和nextDouble会生成一个0到1间的单精度和双精度小数。
+    val random_float = r.nextFloat()
+    val random_double = r.nextDouble()
+    println(s"(0,1)的单精度小数：$random_float，(0,1)的双精度小数：$random_double")
+
+    val r1 = new scala.util.Random(100)
+    println(r1.nextInt(100))
+    //可以重置种子
+    r1.setSeed(10000)
+    println(r1.nextInt(100))
   }
 
 }

@@ -41,8 +41,8 @@ object TestCase {
 //    val b:Double = 0.2
 //    val dgs = ValUtils.~=(a+b,0.3,0.001)
 //    println(s"约等于结果：$dgs,等于结果：${0.3 == (a+b)}")
-    ValUtils.handleBigNum()
-
+//    ValUtils.handleBigNum()
+      ValUtils.randomNum()
   }
 
 }
