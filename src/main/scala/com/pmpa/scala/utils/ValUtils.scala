@@ -38,6 +38,8 @@ object ValUtils {
    * 方法：(1)在所有数值类型都可以使用to*方法，转化为相应的类型。
    *        例如： toByte,toDouble,toInt,toFloat,toString等等。
    *       (2) 在做类型转换之前，一般需要确定是否可转，否则可能抛异常，例如将"foo"转int会报异常。
+   *
+   *        author:natty  2017-12-26
    */
   def valueToValue() ={
     val a = 45.23
@@ -72,5 +74,30 @@ object ValUtils {
     println(s"v2的类型是${v2.getClass.getName}")
   }
 
+  /**
+   * 功能：比较2个浮点数的值。
+   * 说明：在scala浮点计算中， 0.1+0.1=0.2  但是0.1+0.2=0.30000000000000004  其实我们想要的是0.1+0.2=0.3，应该在一定精度下忽略这微小差异。
+   *
+   * author:natty  2017-12-27
+   */
+  def ~=(x:Double,y:Double,precision:Double)={
+      if ((x-y).abs < precision) true else false
+  }
+
+  /**
+   * 功能：需要编写一个处理非常大的整数的程序。
+   * 方法： (1)使用BigInt和BigDecimal处理比较大的数值。
+   *        (2)获得最大的Int值，最大的Byte值，最大的Double值等等。
+   */
+  def handleBigNum() ={
+    var b = BigInt("9876543210")
+    b *= b
+    println(b)
+    println(s"该数是否为整数：${b.isValidInt}")
+    val max_int = Int.MaxValue
+    val max_float = Float.MaxValue
+    val max_byte = Byte.MaxValue
+    println(s"最大整数：$max_int,最大float：$max_float,最大byte：$max_byte")
+  }
 
 }
