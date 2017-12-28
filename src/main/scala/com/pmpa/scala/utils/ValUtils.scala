@@ -1,5 +1,7 @@
 package com.pmpa.scala.utils
 
+import java.util.Locale
+
 /**
  * Created by jay on 2017/12/23.
  */
@@ -135,6 +137,56 @@ object ValUtils {
     val random_list = for (c <- Range(0,r1.nextInt(10))) yield  c*2
     val random_list2 = for (c <- Range(0,r1.nextInt(10))) yield  r.nextPrintableChar()
     println(s"随机整数集合：$random_list，随机字符集合：$random_list2")
+  }
+
+  /**
+   * 功能：创建数值区间、列表、数组
+     方法：(1) 使用RichInt的to，until方法。
+           (2) 其中 a to b 表示区间 [a,b] ； a until b 表示[a,b)
+           (3) 可以使用toArray, toList方法等,转化为array 、List等。
+   *  author:natty  2017-12-27
+   */
+  def createValueList() = {
+    val list1 =  1 to 10
+    val list2 =  1 to 10 by 2
+    println(s"使用to创建数值区间：$list1\n使用to创建数值区间(间隔是2)：$list2")
+    val list3 =  1 until 10
+    println(s"使用until创建数值区间：$list3")
+    val list4 = (1 to 10).toArray
+    val list5 = (1 to 10).toList
+    print("转为array：")
+    print(s"${for (c <-list4) c+"," }，转为list：$list5")
+  }
+
+  /**
+   * 功能：对数值或者金额的小数位或逗号进行格式化。
+   * 方法：(1)基本格式化，可以使用f字符串。
+   *           %1.5f说明： 表示宽度最少为1(算上小数点)，如果宽度大于1按照实际宽度来。小数点后保留5位。
+   *           %06.2f说明：表示宽度最少为6，不足部分前边补0(算上小数点)，小数点后保留2位。
+   *        (2)java.text.NumberFormat.getIntegerInstance是一种简单加逗号的方法。
+   *        (3)java.text.NumberFormat.
+   * author:natty  2017-12-28
+   */
+  def formatValueAmount() = {
+    val pi = scala.math.Pi
+    println(f"按照1.5f格式输出：$pi%1.5f")
+    println(f"按照06.2f格式输出：$pi%06.2f")
+
+    val formatter = java.text.NumberFormat.getIntegerInstance
+    println(formatter.format(1000000))
+    // 可以使用getInstance来处理浮点数。
+    val formatter1 = java.text.NumberFormat.getInstance()
+    println(formatter1.format(1000000.34))
+
+    //金额的格式化
+    val formatter2 = java.text.NumberFormat.getCurrencyInstance
+    val local = new Locale("de","DE")
+   val formatter3 = java.text.NumberFormat.getCurrencyInstance(local)
+    //人民币
+    println(formatter2.format(51002.98346))
+    //
+    println(formatter3.format(51002.98346))
+
   }
 
 }
