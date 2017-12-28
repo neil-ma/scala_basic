@@ -164,7 +164,7 @@ object ValUtils {
    *           %1.5f说明： 表示宽度最少为1(算上小数点)，如果宽度大于1按照实际宽度来。小数点后保留5位。
    *           %06.2f说明：表示宽度最少为6，不足部分前边补0(算上小数点)，小数点后保留2位。
    *        (2)java.text.NumberFormat.getIntegerInstance是一种简单加逗号的方法。
-   *        (3)java.text.NumberFormat.
+   *        (3)java.text.NumberFormat.getCurrencyInstance 格式化金额， 通过Local
    * author:natty  2017-12-28
    */
   def formatValueAmount() = {
@@ -184,9 +184,8 @@ object ValUtils {
    val formatter3 = java.text.NumberFormat.getCurrencyInstance(local)
     //人民币
     println(formatter2.format(51002.98346))
-    //
+    //欧元
     println(formatter3.format(51002.98346))
-
   }
 
 }
