@@ -1,6 +1,6 @@
 package com.pmpa.scala
 
-import com.pmpa.scala.utils.ValUtils
+import com.pmpa.scala.utils.{ExprUtils, ValUtils}
 import com.pmpa.scala.utils.StringUtils._
 
 /**
@@ -45,9 +45,10 @@ object TestCase {
 //      ValUtils.randomNum()
 //      ValUtils.createValueList()
 //      ValUtils.formatValueAmount()
+
+    ExprUtils.testFor()
+
+
   }
-
-
-
 
 }
