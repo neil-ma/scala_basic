@@ -54,8 +54,33 @@ object ExprUtils {
   /**
    * 功能： 在for循环中添加if条件（卫语句）
    * 方法： for循环添加语句块，可以对for循环进行条件筛选，只循环符合条件的数。
+   *        在for循环中使用卫语句，可以使得代码更简洁、可读（业务逻辑分离）
    */
   def forIfTest() = {
+
+  }
+
+  /**
+   * 功能： 使用for表达式 （for...yield）
+   * 方法： (1) 除极个别的特殊情况外，for推导不会改变集合的类型。 例如输入是vector，返回也是vector，输入为List返回也为List。
+   *        (2) 不带卫语句的for/yield表达式，相当于调用map方法。
+   */
+  def forExprTest() = {
+
+
+  }
+
+  /**
+   * 功能 ： Scala中没有break和continue关键字，实现break和continue功能
+   * 方法： (1) 使用scala.util.control.Breaks类实现break和continue功能。
+   *             I. break和breakable是Breaks类中的两个方法。II. break会抛出异常，结束for循环。
+   *             III. breakable定义break的范围。breakable方法捕获异常，控制流继续执行被打断的代码块后的其他代码。
+   *        (2) 标记break语句实现嵌套的break语句（break到哪一层）
+   *            val Inner = new Breaks
+   *            Inner.breakable{... Inner.break ...}
+   */
+  def breakContinueTest() = {
+
 
   }
 
