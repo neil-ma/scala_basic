@@ -81,6 +81,16 @@ object ExprUtils {
    */
   def breakContinueTest() = {
 
+  }
+
+  /**
+   * 功能 ： 在try/catch语句块中捕获一个或者更多的异常。
+   * 方法:  (1) scala的try/catch/finally与java类似，但是在catch语句中需要使用case匹配表达式方法，
+   *        为了捕获多个异常，只需要添加异常类型作为不同的case语句。
+   *
+   */
+  def tryCatchExcpetion() = {
+
 
   }
 
