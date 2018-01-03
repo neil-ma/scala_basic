@@ -93,6 +93,7 @@ object ExprUtils {
    *        (2) 标记break语句实现嵌套的break语句（break到哪一层）
    *            val Inner = new Breaks
    *            Inner.breakable{... Inner.break ...}
+   *   author: natty   2018-01-03
    */
   def breakContinueTest() = {
     //break实现
@@ -139,10 +140,52 @@ object ExprUtils {
    * 方法： scala无三元运算符， 使用if语句作为返回值来替代
    * @param x
    * @return
+   *    author: natty   2018-01-03
    */
   def abs(x:Int):Int = {
     if(x<0) -x else x
   }
+
+  /**
+   * 功能： 模仿java中的switch语句。
+   * 方法： (1) 处理缺省的情况：
+   *           a. 如果不关心缺省匹配的值，可以使用通配符_，例如：case _=> println("Got default value")
+   *           b. 如果关心缺省匹配的值，给它指定一个变量（可以是任意名称的变量）就可以在右侧使用了。
+   *                case default => println(default)
+   *           c. 如果不处理缺省值会抛出MatchError
+   *        (2) @switch注解，使用@switch注解时，如果switch语句不能被编译成tableswitch或者lookupswitch，该注解会引发警告。
+   *            a. 编译成tableswitch或者lookupswitch的switch语句性能更好。
+   *            b. 编译成为tableswitch或者lookupswitch的条件：
+   *               <1>匹配的值是一个已知整数
+   *               <2>匹配必须“简单”。不能包含类型检测，if语句
+   *               <3>保证表达式在编译时的值可用。
+   *               <4>至少有2个case语句
+   *    author: natty   2018-01-03
+   */
+  def testSwitchExpr() = {
+    val i = 7
+    val swit = i match {
+      case 1 => "January"
+      case 2 => "February"
+      case 3 => "March"
+      case 4 => "April"
+      case 5 => "May"
+      case whoa => s"your inputs error: $whoa"
+    }
+    println(s"match结果：$swit")
+
+    //用Switch来匹配数据类型（java只能匹配数字）。
+    val test_obj:Any = new SeqCharSequence("sg")
+    test_obj match {
+      case a:Int => println("This is an Int Obj!!")
+      case b:String => println("This is an String Obj!!")
+      case c:Float => println("This is an Float Obj!!")
+      case d:SeqCharSequence => println("This is an SeqCharSequence Obj!!")
+      case _ => println("Unknown Type!!")
+    }
+  }
+
+
 
   /**
    * 功能 ： 在try/catch语句块中捕获一个或者更多的异常。

@@ -46,8 +46,9 @@ object TestCase {
 //      ValUtils.createValueList()
 //      ValUtils.formatValueAmount()
 
-    ExprUtils.testFor()
-
+//    ExprUtils.testFor()
+//    ExprUtils.breakContinueTest()
+      ExprUtils.testSwitchExpr()
 
   }
 
