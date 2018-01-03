@@ -160,9 +160,12 @@ object ExprUtils {
    *               <2>匹配必须“简单”。不能包含类型检测，if语句
    *               <3>保证表达式在编译时的值可用。
    *               <4>至少有2个case语句
+   *         (3) 多个匹配的条件需要执行同一条业务逻辑。
+   *              将触发相同业务逻辑的match条件用管道符 “|”分隔。
    *    author: natty   2018-01-03
    */
   def testSwitchExpr() = {
+    //获取缺省条件的输入值，将switch主体方法作为一个值返回。
     val i = 7
     val swit = i match {
       case 1 => "January"
@@ -182,6 +185,15 @@ object ExprUtils {
       case c:Float => println("This is an Float Obj!!")
       case d:SeqCharSequence => println("This is an SeqCharSequence Obj!!")
       case _ => println("Unknown Type!!")
+    }
+
+    //多个匹配的条件需要执行同一条业务逻辑
+    val num = 8
+    num match {
+      case 1 | 3 | 5 | 7  => println("The input is odd!!")
+      case 2 | 4 | 6
+           | 8  => println("The input is even!!")
+      case _=> println("input error!!")
     }
   }
 
