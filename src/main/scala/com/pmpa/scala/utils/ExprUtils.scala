@@ -197,6 +197,16 @@ object ExprUtils {
     }
   }
 
+  /**
+   * 功能：在匹配表达式中使用模式匹配
+   * 方法： (1) 为每个类型匹配一个case语句，方法期望继承自基类或者trait的一个实例，然后case语句将引用基类型的子类型。
+   *            所有Scala的类型都是Any的子类型。
+   *        (2) 给模式添加变量  variable @ parttern
+   */
+  def casePatternMatching() = {
+
+
+  }
 
 
   /**
