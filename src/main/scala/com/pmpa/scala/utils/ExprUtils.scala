@@ -1,5 +1,7 @@
 package com.pmpa.scala.utils
 
+import scala.util.control.Breaks
+
 /**
  * 关于Scala的控制结构。
  * Created by natty.ma on 2017/12/28.
@@ -54,20 +56,33 @@ object ExprUtils {
   /**
    * 功能： 在for循环中添加if条件（卫语句）
    * 方法： for循环添加语句块，可以对for循环进行条件筛选，只循环符合条件的数。
-   *        在for循环中使用卫语句，可以使得代码更简洁、可读（业务逻辑分离）
+   *        在for循环中使用卫语句，可以使得代码更简洁、可读（循环、业务逻辑分离），推荐使用大括号的风格来编写
+   *   author: natty   2018-01-02
    */
   def forIfTest() = {
-
+    for {
+      i <- 1 to 10
+      if i % 2 == 0
+    }
+      {
+      println("guard sent")
+      println(i)
+      }
   }
 
   /**
    * 功能： 使用for表达式 （for...yield）
    * 方法： (1) 除极个别的特殊情况外，for推导不会改变集合的类型。 例如输入是vector，返回也是vector，输入为List返回也为List。
+   *              Scala 的list的最后一个值是Nil
    *        (2) 不带卫语句的for/yield表达式，相当于调用map方法。
+   *      author: natty   2018-01-02
    */
   def forExprTest() = {
-
-
+    val fruitList = "apples" :: "bananas" :: "mongo" :: "grape" :: Nil
+    val af = for(i<-fruitList) yield i.capitalize
+    val af1 = af.map(_.capitalize)
+    println(af)
+    println(af1)
   }
 
   /**
@@ -80,7 +95,53 @@ object ExprUtils {
    *            Inner.breakable{... Inner.break ...}
    */
   def breakContinueTest() = {
+    //break实现
+    println("==========Test for break!!======")
+    val test_str = "Congratulations"
+    scala.util.control.Breaks.breakable {
+      for(i<- 0 to 10)
+      {
+        if (i > 4) scala.util.control.Breaks.break
+        else print(test_str(i))
+      }
+    }
+    //continue实现
+    println("==========Test for continue!!======")
+    val test_str2 = "There was a time when the owners of shops and businesses in Chicago"
+    var num = 0
+    for(a <- test_str2)
+      {
+        scala.util.control.Breaks.breakable{
+            if (a!='s') scala.util.control.Breaks.break()
+            else num += 1
+        }
+      }
+    println(s"Find s $num times!!")
+    //嵌套循环和有标签的break
+    val inner = new Breaks;
+    val outer = new Breaks;
+    outer.breakable{
+      for (i<- 0 to 5) {
+        inner.breakable{
+          for(j<- 'a' to 'f')
+            {
+                if( i<4 && j == 'e') inner.break()
+                else if (i>=4) outer.break()
+                else println(s"$i , $j")
+            }
+        }
+      }
+    }
+  }
 
+  /**
+   * 功能： 在scala中使用三元运算符
+   * 方法： scala无三元运算符， 使用if语句作为返回值来替代
+   * @param x
+   * @return
+   */
+  def abs(x:Int):Int = {
+    if(x<0) -x else x
   }
 
   /**
@@ -90,8 +151,6 @@ object ExprUtils {
    *
    */
   def tryCatchExcpetion() = {
-
-
   }
 
 
