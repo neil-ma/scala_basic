@@ -204,7 +204,22 @@ object ExprUtils {
    *        (2) 给模式添加变量  variable @ parttern
    */
   def casePatternMatching() = {
-
+    //尝试匹配：常量模式、变量模式、构造函数模式、序列模式、元组模式、类型模式。
+    var x:Any = 0
+    val pattern_match  = x match {
+      // 常量模式
+      case 0 => "zero"
+      case Nil => "empty list"
+      // 序列模式
+      case List(0,_,_,_) => "3元素list，第一个元素是0"
+      case List(1,_*) => "任意元素list，以1开头"
+      case Vector(1,_*) => "任意元素vector，以1开头"
+      //元组模式 tuple
+      case (a,b,c) => s"got $a $b $c"
+      //构造函数模式
+      case
+    }
+    println(pattern_match)
 
   }
 
