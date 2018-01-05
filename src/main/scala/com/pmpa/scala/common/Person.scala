@@ -1,6 +1,5 @@
 package com.pmpa.scala.common
 
-import javax.xml.bind.annotation.XmlType.DEFAULT
 
 /**
  * Created by natty.ma on 2018/1/4.
@@ -190,3 +189,22 @@ object PersonSingle{
     val person = new PersonSingle("Lily",14)
     def getInstance() = {person}
 }
+
+/**
+  * 功能： 为主构造函数的参数添加默认值。
+ * 方法： 定义好了参数后，后边带上等于默认值
+ *        (1)在构造类的对象时，可以使用param1 = value1这种形式来指定参数值。
+  * @param timeout
+ *   测试方法：
+ *  val s1 = new Socket()
+    println(s1.timeout,s1.port)
+
+    val s2 = new Socket(5000)
+    println(s2.timeout,s2.port)
+
+    val s3 = new Socket(port=14,timeout = 3000)
+    println(s3.timeout,s3.port)
+ *
+ *   author:natty  2018-01-06
+  */
+class Socket(val timeout:Int = 10000,val port:Int = 2){}
