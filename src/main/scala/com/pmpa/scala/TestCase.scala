@@ -61,10 +61,9 @@ object TestCase {
 //    println(car2.toString())
 //    println(car3.toString())
 
-    val carcase = Carcase()
-    val carcase1 = Carcase(81728834.0)
-    println(carcase)
-    println(carcase1)
+     val p = new PersonSingle()          //报错：constructor PersonSingle in class PersonSingle cannot be accessed
+     val p1 = PersonSingle.getInstance()
+     println(p1)
   }
 
 }

@@ -166,3 +166,27 @@ object Carcase {
     new Carcase("defaultName",price)
   }
 }
+
+/**
+ * 功能：定义私有的主构造函数。
+ * 方法：(1)在类名和构造函数接收的任意参数之间插入private关键字，就可以创建私有主构造函数。无法通过new创建该类实例。
+ *       (2)可以使用该方法来创建单例模式。
+ * @param name
+ * @param age
+ *   测试语句：
+ *   val p = new PersonSingle()          //报错：constructor PersonSingle in class PersonSingle cannot be accessed
+     val p1 = PersonSingle.getInstance()
+     println(p1)
+
+
+     author:natty  2018-01-05
+ */
+case class PersonSingle private (var name:String,var age:Int) {
+    override def toString() = {
+      s"$name is $age years old!"
+    }
+}
+object PersonSingle{
+    val person = new PersonSingle("Lily",14)
+    def getInstance() = {person}
+}
