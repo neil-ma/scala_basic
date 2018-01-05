@@ -1,5 +1,6 @@
 package com.pmpa.scala
 
+import com.pmpa.scala.common._
 import com.pmpa.scala.utils.{ExprUtils, ValUtils}
 import com.pmpa.scala.utils.StringUtils._
 
@@ -48,7 +49,12 @@ object TestCase {
 
 //    ExprUtils.testFor()
 //    ExprUtils.breakContinueTest()
-      ExprUtils.testSwitchExpr()
+//      ExprUtils.testSwitchExpr()
+//      val p = new Person("Jim","Green")
+
+    val p = new Person5("Lily")
+    println(p.name)   //可读，默认是val
+//    p.name = "Jim"   //报错，默认是val
 
   }
 

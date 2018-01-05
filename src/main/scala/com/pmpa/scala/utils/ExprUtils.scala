@@ -217,7 +217,7 @@ object ExprUtils {
       //元组模式 tuple
       case (a,b,c) => s"got $a $b $c"
       //构造函数模式
-      case
+      case _ => s"default"
     }
     println(pattern_match)
 
