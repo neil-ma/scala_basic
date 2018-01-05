@@ -98,6 +98,9 @@ case class Person5(name:String){}
  *        (2)每个辅助构造函数必须用之前定义的构造函数（不一定非要调用主构造函数）。
  *        (3)每个辅助构造函数，必须有不同的签名（参数列表）
  *        (4)一个构造函数通过this调用另一个不同的构造函数。
+ *
+ *        (5)Case类是一个会自动生成很多模板代码的特殊类。在case类中添加辅助构造函数不同于一般类，它们是类的伴生对象中的apply方法。
+ *           如果想要给case类加一个新的构造函数，那么需要在case class对应的伴生对象提供新签名的apply方法（返回类型是case class类型）
  * @param brand
  * @param price
  *    author:natty  2018-01-05
@@ -135,4 +138,31 @@ class Car(var brand:String,var price:Double) {
 object Car {
   val DEFAULT_PRICE = 18934560.00
   val DEFAULT_BRAND = "FORD"
+}
+
+/**
+ *  测试语句：
+ *  val carcase = Carcase("TOYOTA",1827834)
+    val carcase1 = Carcase.apply("HONDA",81728834)
+    println(carcase)
+    println(carcase1)
+
+ * case class 不需要new关键字就可以创建对象，val carcase = Carcase("TOYOTA",1827834) Scala会编译成：
+ *   val carcase = Carcase.apply("TOYOTA",1827834)  这是一种工厂方法，调用的是Carcase类的伴生对象中的apply方法。
+ *
+ */
+//case class
+case class Carcase (var brand:String,var price:Double){
+  override def toString() = {
+    s"Car Brand:$brand , Car Price:$price"
+  }
+}
+//case class对应的伴生对象
+object Carcase {
+  def apply():Carcase ={
+    new Carcase("NO NAME",0)
+  }
+  def apply(price:Double):Carcase = {
+    new Carcase("defaultName",price)
+  }
 }

@@ -52,10 +52,19 @@ object TestCase {
 //      ExprUtils.testSwitchExpr()
 //      val p = new Person("Jim","Green")
 
-    val p = new Person5("Lily")
-    println(p.name)   //可读，默认是val
-//    p.name = "Jim"   //报错，默认是val
+//    val car =  new Car("Suzuki")
+//    val car1 =  new Car("Suzuki",123456)
+//    val car2 =  new Car(123456)
+//    val car3 =  new Car()
+//    println(car.toString())
+//    println(car1.toString())
+//    println(car2.toString())
+//    println(car3.toString())
 
+    val carcase = Carcase()
+    val carcase1 = Carcase(81728834.0)
+    println(carcase)
+    println(carcase1)
   }
 
 }
