@@ -12,8 +12,12 @@ package com.pmpa.scala.itrait
 
     3.子类继承Trait，使用或者覆写Trait的方法。
        wa_speak()方法，在Warcraft特质中有定义，在这里做了覆写。
+
     4.继承类，并继承Trait，简单混入特质。 class Tiger(name:String) extends Animal(name) with Warcraft with Orc 这里有继承和混入。
+
     8.对象创建时，给对象添加特质，而不是给整个类添加特质。
+      例如： val problemChild = new problemChild with Debugger
+
     9.在Scala程序中实现java接口。 Tiger类实现了java的接口 Attack。
   * @param name
   */
