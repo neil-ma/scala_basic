@@ -77,7 +77,7 @@ object ExprUtils {
    *        (2) 不带卫语句的for/yield表达式，相当于调用map方法。
    *      author: natty   2018-01-02
    */
-  def forExprTest() = {
+  def forExprTest = {
     val fruitList = "apples" :: "bananas" :: "mongo" :: "grape" :: Nil
     val af = for(i<-fruitList) yield i.capitalize
     val af1 = af.map(_.capitalize)
