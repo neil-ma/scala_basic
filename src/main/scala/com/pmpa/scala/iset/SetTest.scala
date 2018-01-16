@@ -47,10 +47,8 @@ object SetTest extends  App{
   //测试Stream，惰性List，只在计算时候才载入数据（例如：sum、max、size等）
   val stream01 = 72 #:: 98 #:: 187 #:: Stream.empty
   val stream02 = (1 to 1000000).toStream
-  //惰性计算
-  println(stream02.filter(_>2000))
-  //实际计算
-  println(stream02.sum)
+//  println(stream02.filter(_>2000)) //惰性计算
+//  println(stream02.sum)  //实际计算
 
   /**
    * ListBuffer       -----------------------------------------------------------------------
@@ -67,5 +65,17 @@ object SetTest extends  App{
   /**
    * Array            -----------------------------------------------------------------------
    */
+  //创建数组的多种方式：
   val array01 = Array(56,12,30)
+  val array02 = Array.range(0,11)
+  /*
+    Array方法：def tabulate[T]( n: Int )(f: (Int)=> T): Array[T]
+    返回指定长度数组，每个数组元素为指定函数的返回值，默认从 0 开始。
+   */
+  val array03 = Array.tabulate(5)(i=>i*2)
+  val array04 = Array.fill(3)("fool")
+  val array05 = List(1,2,3,45,6).toArray
+  val array06 = "FOOL".toArray
+//  println(array03(2))   //数组访问方法
+
 }
