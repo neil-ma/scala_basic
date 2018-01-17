@@ -29,8 +29,12 @@ import scala.collection.mutable.{ArrayBuffer, ListBuffer}
      多维数组：创建方法 ： 1：使用Array.ofDim来创建（最多五维）。方法2：创建数组的数组 ；访问方法：dimarray02(1)(1)
 
   Map：
-     创建可变和不可变映射：
-
+     创建可变和不可变映射：使用scala.collection.mutable.Map来创建可变映射；直接使用Map创建不可变映射。
+     使用+= 添加一个或者多个元素，使用++= 合并另一个map；使用 -= 或者 --=来删除map中的元素。注意删除时候，只提供key。
+     使用put向映射添加元素。retain保留符合谓词的元素。remove去掉某个key的元素。clear清空映射。
+     对于定义为var类型的不可变Map，向其中添加新的元素是可以的，但是update某一个元素确实不行的。如果不可变映射定义为val型，则也不可以增加元素
+     查询一个不存在的key，会返回异常：java.util.NoSuchElementException
+     使用keySet方法获得Map的Key的集合（返回一个Set）。使用keysIterator方法返回一个基于key的迭代器。使用keys方法获得一个Iterable。同样地，要获取values都有相应的方法，valuesIterator方法和values方法。
  */
 
 object SetTest extends  App{
@@ -104,10 +108,10 @@ object SetTest extends  App{
   arraybuffer01 -= "John"
   arraybuffer01.clear
 
-  val arraybuffer02 = ArrayBuffer("Tommy","Joffery")
+  val arraybuffer02 = ArrayBuffer("Tommy","Cercei")
   arraybuffer02 += ("Tony","Ara")
   arraybuffer02.remove(0)
-  arraybuffer02 --= Array("Joffery","Tony")
+  arraybuffer02 --= Array("Cercei","Tony")
 //  println(arraybuffer01.mkString(","))
 //  println(arraybuffer02.mkString(","))
 
@@ -127,8 +131,30 @@ object SetTest extends  App{
    */
   //不可变映射
   val map01 = Map("AL" -> "ALIBABA","TX" -> "TENCENT","BD" -> "BAIDU")
-  var map02 = Map(("AL","ALIBABA"),("TX","TENCENT"),("BD","BAIDU"))
+  //如果查询不存在的key，会返回withDefaultValue方法定义的值，即："Not Found"
+  var map02 = Map(("AL","ALIBABA"),("TX","TENCENT"),("BD","BAIDU")).withDefaultValue("Not Found")
   //可变映射
   var map03 = scala.collection.mutable.Map("AL" -> "ALIBABA","TX" -> "TENCENT","BD" -> "BAIDU")
+  //使用+= 添加一个或者多个元素，使用++= 合并另一个map
   map03 += ("JD" ->"JINGDONG")
+  map03 ++= List("TT" -> "TOUTIAO","MT" -> "MEITUAN")
+  //使用 -= 或者 --=来删除map中的元素。注意删除时候，只提供key
+  map03 -= ("TT","BD","TX")
+
+  //使用put向映射添加元素。retain保留符合谓词的元素。remove去掉某个key的元素。clear清空映射。
+  map03.put("QN" , "QUNA")
+  map03.retain((k,v) => k=="QN")
+  map03.remove("QN")
+  map03.clear
+  //对于定义为var类型的不可变Map，向其中添加新的元素是可以的，但是update某一个元素确实不行的。如果不可变映射定义为val型，则也不可以增加元素
+  map02 += ("HW" -> "HUAWEI")
+  //map02("AL") = "TAOBAO"   //error
+
+  //如果查不到Key "MT"，则返回"Not Found -- getOrElse"
+  map02.getOrElse("MT","Not Found -- getOrElse")
+  //返回一个Option对象
+  map02.get("MT")
+
+  map02.valuesIterator
+
 }
