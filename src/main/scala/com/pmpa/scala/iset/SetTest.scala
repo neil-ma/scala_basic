@@ -155,6 +155,6 @@ object SetTest extends  App{
   //返回一个Option对象
   map02.get("MT")
 
-  map02.valuesIterator
+  for (i <- map02.valuesIterator) println(i)
 
 }
