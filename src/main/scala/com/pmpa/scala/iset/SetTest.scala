@@ -35,6 +35,7 @@ import scala.collection.mutable.{ArrayBuffer, ListBuffer}
      对于定义为var类型的不可变Map，向其中添加新的元素是可以的，但是update某一个元素确实不行的。如果不可变映射定义为val型，则也不可以增加元素
      查询一个不存在的key，会返回异常：java.util.NoSuchElementException
      使用keySet方法获得Map的Key的集合（返回一个Set）。使用keysIterator方法返回一个基于key的迭代器。使用keys方法获得一个Iterable。同样地，要获取values都有相应的方法，valuesIterator方法和values方法。
+     遍历Map： for语句，foreach语句，
  */
 
 object SetTest extends  App{
@@ -123,7 +124,7 @@ object SetTest extends  App{
 
   val dimarray03 = Array(Array('b','f'),Array('z','c'))
   val dimarray04 = dimarray02 ++ dimarray03
-  println(dimarray04(2)(1))   //访问多维数组元素
+//  println(dimarray04(2)(1))   //访问多维数组元素
 
 
   /**
@@ -150,11 +151,102 @@ object SetTest extends  App{
   map02 += ("HW" -> "HUAWEI")
   //map02("AL") = "TAOBAO"   //error
 
-  //如果查不到Key "MT"，则返回"Not Found -- getOrElse"
+  //1.如果查不到Key "MT"，则返回"Not Found -- getOrElse"
   map02.getOrElse("MT","Not Found -- getOrElse")
   //返回一个Option对象
   map02.get("MT")
+  //使用keySet方法获得Map的Key的集合（返回一个Set）。使用keysIterator方法返回一个基于key的迭代器。使用keys方法获得一个Iterable。
+  val s1 = map02.keySet
+//  for (i <- map02.keysIterator) println(i)
+//  for (j <- map02.keys) println(j)
+  //遍历Map映射的方法：
+  for((key,value) <- map02) println(s"$key -> $value")
+  map02.foreach{
+    case (k,v) => println(s"$k -> $v")
+    case _ => Unit
+  }
+  map02.foreach(x=>println(s"${x._1} -> ${x._2}"))
+  //2.映射反转
+  val map02Re = for((k,v)<-map02) yield (v,k)
+  //测试key、value是否包含某个值。
+  map02.contains("AL")
+  map02.valuesIterator.exists(_.contains("ALI"))
 
-  for (i <- map02.valuesIterator) println(i)
+  //3.过滤map：
+  //可变映射，可以通过retain方法来过滤map。retain方法会改变map本身。这里包含匿名函数：(k,v) => ...
+  var map05 = scala.collection.mutable.Map(1->"bj",4->"gz",3->"sz",2->"sh",5->"cd")
+  map05.retain((k,v) => k>2 )
+  //transform方法可以改变映射
+  map05.transform((k,v) => v.toUpperCase())
 
+  // 不可变映射和可变映射通用方法,使用filterKeys方法需要将结果赋给一个新的map；filter方法、take方法（获取前几个）
+  var map06 = Map(1->"bj",4->"gz",3->"sz",2->"sh",5->"cd")
+  val map07 = map06.filterKeys(_>=2)
+  val map08 = map06.filterKeys(Set(2,3))
+  val map09 = map06.filter(t=>t._1>2)
+  val map10 = map06.take(2)   //取map中的前2个元素。
+
+  //4.按照map的key 或者 value排序
+  //1. map06.toSeq 转化为元组的集合。 2.sortBy(_._1)按照结合中每个tuple的第二个元素排序 3.排序完成后，存放到一个ListMap里
+  //关于_* ： 将数据转换（一个集合转为多个参数），并且作为多个参数传给ListMap或者LinkedHashMap。 不能直接用元组序列构建LinkedHashMap，LinkedHashMap的伴生对象接受一个Tuple2的变长参数
+  //按key从小到大
+  val map11 = scala.collection.mutable.LinkedHashMap(map06.toSeq.sortBy(_._1):_*)
+  //按key从大到小
+  val map12 = scala.collection.mutable.LinkedHashMap(map06.toSeq.sortWith(_._1>_._1):_*)
+
+  //5.按照key或者value取最大的。
+  //将按照map06的key取一个最大的元素，是一个元组(key,value)。
+  map06.max
+  //获得最大的key
+  map06.keysIterator.max
+  map06.keysIterator.reduce((x,y) => if (x>y) x else y)
+
+  /**
+   * 集合Set  -----------------------------------------------------------------------
+   * 1.给集合添加元素（可变集合和不可变集合）
+   *    可变集添加或删除元素，推荐使用+=、++=、-=、--=来实现
+   * 2.删除集合元素：
+   *    可以使用retain，clear，remove等方法。
+   *    remove 实际操作是去掉参数的元素（不是第4个元素）。
+   * 3.使用可排序集合 ：
+   *   用SortedSet获得有序集合；用LinkedHashSet获取按插入顺序排序的集合。
+   *
+   */
+   val set01 = Set(1)
+   var set02 = scala.collection.mutable.Set[Int]()
+   set02 += 4
+   set02 ++= Seq(3,4,5,6)
+   set02 ++= List(8,6)
+   //不可变Set添加元素后，赋给一个新的Set。
+   val set03 = set01 + (2,3,4,4,5,6,7)
+
+   set02 --= Vector(1,2,3)
+  //一定注意，set.remove 实际操作是去掉参数的元素（不是第4个元素）。下面是在Set中去掉元素"4"，如果set中有4，则删掉该元素，并返回true，否则返回false
+   set02.remove(4)
+  //保留谓词为True的元素
+   set02.retain(_>6)
+   set02.clear
+
+  //按照元素值的顺序排序的set
+   val set04 = scala.collection.mutable.SortedSet[String]("zoo","lexus","max","bee")
+   val set05 = scala.collection.mutable.LinkedHashSet[String]("zoo","lexus","max","bee")
+
+  /**
+   * 队列 和 栈 -----------------------------------------------------------------------
+   * 1.队列是一种先进先出(FIFO)的数据结构。有可变和不可变的队列
+   *   使用+= ， ++= 或者 enqueue方法来增加元素
+   * 2. 栈是一种后进先出（LIFO）数据结构。用push加入元素、用pop弹出元素
+   */
+
+  var queue01 = scala.collection.mutable.Queue("zoo","lexus","max","bee")
+  queue01 += "keeper"
+  queue01 ++= Vector("last","must")
+  queue01.enqueue("min")
+  //dequeue从队列取出元素。
+  val next = queue01.dequeue()
+
+  val stack01 = scala.collection.mutable.Stack(5,0,2)
+  stack01.push(8)
+  stack01.push(123)
+  val s03 = stack01.pop()
 }
