@@ -1,5 +1,7 @@
 package com.pmpa.scala.iset
 
+import java.io.File
+
 import scala.io.Source
 
 /**
@@ -33,6 +35,19 @@ object FileUtil {
   def presoString(str:String):Unit = {
     for (i <- Source.fromString(str).getLines())
         println(i.toUpperCase())
+  }
+
+  /**
+   * 返回该目录下的 文件或者子目录
+   * @param directory
+   * @return
+   */
+  def listFiles(directory:String,fileOrDir:String):List[File] = {
+    var s:List[File] =List()
+    val files = new File(directory).listFiles()
+    for (f <- files) s ::= f
+    if (fileOrDir == "file") s.filter(_.isFile)
+      else s.filter(_.isDirectory)
   }
 
 }

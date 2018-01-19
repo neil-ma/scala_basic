@@ -14,8 +14,8 @@ object FileTest extends App{
   1.读取文件
    */
   val file01 = "resources/files4read"
-  for (i <- scala.io.Source.fromFile(file01).getLines())
-    println(i)
+//  for (i <- scala.io.Source.fromFile(file01).getLines())
+//    println(i)
 
   /*
   2.写入文件
@@ -37,9 +37,9 @@ object FileTest extends App{
 //  val out = new FileOutputStream(new File("resources/test.binary"))
 
 //  FileUtil.csvDemo("resources/getme.csv",8,3)
-  FileUtil.presoString("jason\nsfg\nlets")
+//  FileUtil.presoString("jason\nsfg\nlets")
 
   val st = new Stock("costa",23.24)
-
-
+  val s:List[File] = FileUtil.listFiles("D:\\Programes\\eclipse","dir")
+  for (i<-s) println(i.getName)
 }
