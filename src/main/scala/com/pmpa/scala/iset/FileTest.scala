@@ -38,4 +38,8 @@ object FileTest extends App{
 
 //  FileUtil.csvDemo("resources/getme.csv",8,3)
   FileUtil.presoString("jason\nsfg\nlets")
+
+  val st = new Stock("costa",23.24)
+
+
 }
